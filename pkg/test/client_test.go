@@ -1,20 +1,24 @@
 package test
 
 import (
+	"github.com/apibrew/apibrew/pkg/api"
 	"github.com/apibrew/apibrew/pkg/service"
 	"github.com/apibrew/apibrew/pkg/service/impl"
-	"github.com/apibrew/apibrew/pkg/stub"
 	"github.com/apibrew/apibrew/pkg/test/setup"
-	sso2 "github.com/apibrew/sso/pkg"
+	"github.com/apibrew/template/pkg"
 )
-
-var recordClient stub.RecordClient
 
 var container service.Container
 
+var apiInterface api.Interface
+
 func init() {
-	recordClient = setup.RecordClient
 	container = setup.GetContainer()
 
-	container.(*impl.App).RegisterModule(sso2.NewModule)
+	app := container.(*impl.App)
+
+	app.RegisterModule(pkg.NewModule)
+
+	apiInterface = api.NewInterface(container)
+
 }

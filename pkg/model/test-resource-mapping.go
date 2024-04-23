@@ -31,7 +31,7 @@ func (m *TestResourceMapper) New() *TestResource {
 
 func (m *TestResourceMapper) ResourceIdentity() abs.ResourceIdentity {
 	return abs.ResourceIdentity{
-		Namespace: "test-module",
+		Namespace: "template",
 		Name:      "TestResource",
 	}
 }
@@ -73,6 +73,19 @@ func (m *TestResourceMapper) ToProperties(testResource *TestResource) map[string
 			panic(var_Name_err)
 		}
 		properties["name"] = var_Name_mapped
+	}
+
+	var_Description := testResource.Description
+
+	if var_Description != nil {
+		var var_Description_mapped *structpb.Value
+
+		var var_Description_err error
+		var_Description_mapped, var_Description_err = types.ByResourcePropertyType(model.ResourceProperty_STRING).Pack(*var_Description)
+		if var_Description_err != nil {
+			panic(var_Description_err)
+		}
+		properties["description"] = var_Description_mapped
 	}
 
 	var_Version := testResource.Version
@@ -118,6 +131,20 @@ func (m *TestResourceMapper) FromProperties(properties map[string]*structpb.Valu
 
 		s.Name = var_Name_mapped
 	}
+	if properties["description"] != nil && properties["description"].AsInterface() != nil {
+
+		var_Description := properties["description"]
+		val, err := types.ByResourcePropertyType(model.ResourceProperty_STRING).UnPack(var_Description)
+
+		if err != nil {
+			panic(err)
+		}
+
+		var_Description_mapped := new(string)
+		*var_Description_mapped = val.(string)
+
+		s.Description = var_Description_mapped
+	}
 	if properties["version"] != nil && properties["version"].AsInterface() != nil {
 
 		var_Version := properties["version"]
@@ -136,7 +163,7 @@ func (m *TestResourceMapper) FromProperties(properties map[string]*structpb.Valu
 
 func (m *TestResourceMapper) ToUnstructured(testResource *TestResource) unstructured.Unstructured {
 	var properties unstructured.Unstructured = make(unstructured.Unstructured)
-	properties["type"] = "test-module/TestResource"
+	properties["type"] = "template/TestResource"
 
 	var_Id := testResource.Id
 
@@ -154,6 +181,15 @@ func (m *TestResourceMapper) ToUnstructured(testResource *TestResource) unstruct
 
 		var_Name_mapped = *var_Name
 		properties["name"] = var_Name_mapped
+	}
+
+	var_Description := testResource.Description
+
+	if var_Description != nil {
+		var var_Description_mapped interface{}
+
+		var_Description_mapped = *var_Description
+		properties["description"] = var_Description_mapped
 	}
 
 	var_Version := testResource.Version

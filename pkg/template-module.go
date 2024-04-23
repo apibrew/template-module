@@ -1,4 +1,4 @@
-package template
+package pkg
 
 import (
 	"github.com/apibrew/apibrew/pkg/api"
@@ -8,7 +8,7 @@ import (
 	"github.com/apibrew/apibrew/pkg/service"
 	"github.com/apibrew/apibrew/pkg/service/backend-event-handler"
 	"github.com/apibrew/apibrew/pkg/util"
-	model2 "github.com/apibrew/sso/pkg/model"
+	model2 "github.com/apibrew/template/pkg/model"
 	"google.golang.org/protobuf/types/known/structpb"
 	"log"
 )
@@ -47,7 +47,7 @@ func (m module) ensureNamespace() {
 		Records: []*model.Record{
 			{
 				Properties: map[string]*structpb.Value{
-					"name": structpb.NewStringValue("sso"),
+					"name": structpb.NewStringValue("template"),
 				},
 			},
 		},
@@ -59,7 +59,9 @@ func (m module) ensureNamespace() {
 }
 
 func (m module) ensureResources() {
-	var list = []*model.Resource{}
+	var list = []*model.Resource{
+		model2.TestResourceResource,
+	}
 
 	for _, resource := range list {
 		existingResource, err := m.container.GetResourceService().GetResourceByName(util.SystemContext, resource.Namespace, resource.Name)

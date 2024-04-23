@@ -1,9 +1,11 @@
 type: resource
 name: TestResource
 namespace:
-  name: test-module
+  name: template
 virtual: true
 properties:
   name:
+    type: string
+  description:
     type: string
 annotations:

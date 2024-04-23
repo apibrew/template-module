@@ -13,7 +13,7 @@ import (
 
 var TestResourceResource = &model.Resource{
 	Name:      "TestResource",
-	Namespace: "test-module",
+	Namespace: "template",
 	Properties: []*model.ResourceProperty{
 		{
 			Name:         "id",
@@ -29,6 +29,10 @@ var TestResourceResource = &model.Resource{
 		},
 		{
 			Name: "name",
+			Type: model.ResourceProperty_STRING,
+		},
+		{
+			Name: "description",
 			Type: model.ResourceProperty_STRING,
 		},
 		{

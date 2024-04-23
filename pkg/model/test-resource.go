@@ -9,9 +9,10 @@ package model
 import "github.com/google/uuid"
 
 type TestResource struct {
-	Id      *uuid.UUID `json:"id,omitempty"`
-	Name    *string    `json:"name,omitempty"`
-	Version int32      `json:"version,omitempty"`
+	Id          *uuid.UUID `json:"id,omitempty"`
+	Name        *string    `json:"name,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	Version     int32      `json:"version,omitempty"`
 }
 
 func (s TestResource) GetId() *uuid.UUID {
@@ -19,6 +20,9 @@ func (s TestResource) GetId() *uuid.UUID {
 }
 func (s TestResource) GetName() *string {
 	return s.Name
+}
+func (s TestResource) GetDescription() *string {
+	return s.Description
 }
 func (s TestResource) GetVersion() int32 {
 	return s.Version

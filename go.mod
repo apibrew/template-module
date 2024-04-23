@@ -1,9 +1,9 @@
-module github.com/apibrew/sso
+module github.com/apibrew/template
 
 go 1.20
 
 require (
-	github.com/apibrew/apibrew v1.3.81
+	github.com/apibrew/apibrew v1.3.82
 	github.com/google/uuid v1.5.0
 	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/protobuf v1.30.0

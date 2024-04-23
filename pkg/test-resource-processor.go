@@ -1,8 +1,9 @@
-package template
+package pkg
 
 import (
 	"github.com/apibrew/apibrew/pkg/api"
-	model2 "github.com/apibrew/sso/pkg/model"
+	"github.com/apibrew/apibrew/pkg/errors"
+	model2 "github.com/apibrew/template/pkg/model"
 )
 
 type testResourceProcessor struct {
@@ -11,21 +12,21 @@ type testResourceProcessor struct {
 }
 
 func (t testResourceProcessor) Mapper() Mapper[*model2.TestResource] {
-	//TODO implement me
-	panic("implement me")
+	return model2.TestResourceMapperInstance
 }
 
 func (t testResourceProcessor) Register(entity *model2.TestResource) error {
-	//TODO implement me
-	panic("implement me")
+	entity.Description = entity.Name
+
+	return nil
 }
 
 func (t testResourceProcessor) Update(entity *model2.TestResource) error {
-	//TODO implement me
-	panic("implement me")
+	entity.Description = entity.Name
+
+	return nil
 }
 
 func (t testResourceProcessor) UnRegister(entity *model2.TestResource) error {
-	//TODO implement me
-	panic("implement me")
+	return errors.LogicalError.WithMessage("unregister not implemented")
 }
