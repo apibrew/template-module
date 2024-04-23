@@ -1,0 +1,9 @@
+type: resource
+name: TestResource
+namespace:
+  name: test-module
+virtual: true
+properties:
+  name:
+    type: string
+annotations:

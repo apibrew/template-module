@@ -1,1 +1,1 @@
-# template-module
+# template module
