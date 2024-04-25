@@ -29,7 +29,7 @@ func RegisterResourceProcessor[T any](handlerName string,
 	backendEventHandler backend_event_handler.BackendEventHandler,
 	container service.Container,
 	resource *model.Resource) error {
-	handler := func(ctx context.Context, event *model.Event) (*model.Event, errors.ServiceError) {
+	handler := func(ctx context.Context, event *model.Event) (*model.Event, error) {
 		for idx, record := range event.Records {
 			entity := processor.Mapper().FromRecord(record)
 

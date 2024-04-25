@@ -73,7 +73,7 @@ func (m module) ensureResources() {
 			if err != nil {
 				log.Fatal(err)
 			}
-		} else if err.Is(errors.ResourceNotFoundError) {
+		} else if errors.ResourceNotFoundError.Is(err) {
 			_, err = m.container.GetResourceService().Create(util.SystemContext, resource, true, true)
 
 			if err != nil {
